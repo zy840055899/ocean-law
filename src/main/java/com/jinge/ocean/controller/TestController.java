@@ -1,28 +1,32 @@
 package com.jinge.ocean.controller;
 
+import com.jinge.ocean.dao.TestDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
+
 /**
- * Created by zhengying on 15/9/29.
+ * @author zheng y 2018-9-27 11:09:24
  */
 @Controller
-@RequestMapping("test")
 public class TestController {
 
+    @Resource
+    private TestDao testDao;
 
-    @RequestMapping("index")
-    public String detail(Model model) {
-        model.addAttribute("aaa", 88888);
-        model.addAttribute("aaa", 123);
-        return "test/index";
+    @RequestMapping("test")
+    public String test(Model model) {
+        model.addAttribute("aaa", testDao.test());
+        return "test";
     }
 
-    @RequestMapping("post")
+    @RequestMapping("json")
     @ResponseBody
-    public String asadad(Model model,String aaa) {
-        return aaa+"zy";
+    public String json(Model model,String aaa) {
+        return "zy:"+aaa;
     }
 }

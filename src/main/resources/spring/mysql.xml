@@ -18,21 +18,21 @@
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="myDataSource"/>
-        <property name="mapperLocations" value="classpath:sql/*/*.xml"/>
+        <property name="mapperLocations" value="classpath:sql/*.xml"/>
         <!-- mybatis分页插件配置 start -->
-        <property name="plugins">
-            <array>
-                <bean class="com.github.pagehelper.PageInterceptor">
-                    <property name="properties">
-                        <!--使用下面的方式配置参数，一行配置一个 -->
-                        <value>
-                            pageSizeZero=true
-                            reasonable=true
-                        </value>
-                    </property>
-                </bean>
-            </array>
-        </property>
+        <!--<property name="plugins">-->
+            <!--<array>-->
+                <!--<bean class="com.github.pagehelper.PageInterceptor">-->
+                    <!--<property name="properties">-->
+                        <!--&lt;!&ndash;使用下面的方式配置参数，一行配置一个 &ndash;&gt;-->
+                        <!--<value>-->
+                            <!--pageSizeZero=true-->
+                            <!--reasonable=true-->
+                        <!--</value>-->
+                    <!--</property>-->
+                <!--</bean>-->
+            <!--</array>-->
+        <!--</property>-->
         <!--end-->
     </bean>
 
@@ -41,8 +41,9 @@
     <!--<property name="annotationClass" value="com.test.annotation.MyRepository"/>-->
     <!--</bean>-->
 
+    <!--此处value在idea下多模块使用会有坑，即便当前module不存在该路径，而其他module有，则该路径就不会报错-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.test.dao"/>
+        <property name="basePackage" value="com.jinge.ocean.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
