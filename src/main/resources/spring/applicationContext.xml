@@ -47,16 +47,14 @@
     <!--<import resource="quartz.xml" />-->
 
 
-    <!--<mvc:interceptors>-->
-        <!--<mvc:interceptor>-->
-            <!--&lt;!&ndash; 第一个*代表Controller类的访问路径； 第二个*代表Controller方法的访问路径； 即所有的方法都要受此拦截器检查。 &ndash;&gt;-->
-            <!--<mvc:mapping path="/**" />-->
-            <!--<mvc:exclude-mapping path="/index/login" />-->
-            <!--<mvc:exclude-mapping path="/index/checkLogin" />-->
-            <!--<mvc:exclude-mapping path="/index/register" />-->
-            <!--<bean class="com.test.interceptor.LoginInterceptor" />-->
-        <!--</mvc:interceptor>-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- 第一个*代表Controller类的访问路径； 第二个*代表Controller方法的访问路径； 即所有的方法都要受此拦截器检查。 -->
+            <mvc:mapping path="/**" />
+            <mvc:exclude-mapping path="/test.do" />
+            <bean class="com.jinge.ocean.interceptor.LoginInterceptor" />
+        </mvc:interceptor>
 
-    <!--</mvc:interceptors>-->
+    </mvc:interceptors>
 
 </beans>
