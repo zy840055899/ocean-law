@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+
+    <util:properties id="jdbc" location="classpath:config/database.properties"/>
+    <bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="#{jdbc.driver}"/>
+        <property name="url" value="#{jdbc.url}"/>
+        <property name="username" value="#{jdbc.user}"/>
+        <property name="password" value="#{jdbc.pwd}"/>
+        <property name="maxActive" value="#{jdbc.maxPoolSize}"/>
+        <property name="minIdle" value="#{jdbc.minPoolSize}"/>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="myDataSource"/>
+        <property name="mapperLocations" value="classpath:sql/*/*.xml"/>
+        <!-- mybatis分页插件配置 start -->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <!--使用下面的方式配置参数，一行配置一个 -->
+                        <value>
+                            pageSizeZero=true
+                            reasonable=true
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+        <!--end-->
+    </bean>
+
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+    <!--<property name="basePackage" value="com.test.dao"/>-->
+    <!--<property name="annotationClass" value="com.test.annotation.MyRepository"/>-->
+    <!--</bean>-->
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.test.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="myDataSource" />
+    </bean>
+
+
+</beans>
+
