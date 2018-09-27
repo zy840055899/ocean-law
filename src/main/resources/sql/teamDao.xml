@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.jinge.ocean.dao.TeamDao">
+
+
+    <select id="getAllTeams" resultType="com.jinge.ocean.entity.Team" parameterType="string">
+        select id, name, phone, head, head_area "headArea", createtime from team
+        <if test="teamName!='' and teamName!=null">
+            where name like CONCAT('%',#{teamName},'%')
+        </if>
+    </select>
+
+
+
+</mapper>
+
+

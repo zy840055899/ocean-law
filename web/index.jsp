@@ -16,7 +16,7 @@
 <script>
     $(function () {
         console.log(345);
-    })
+    });
 </script>
 <body>
 
