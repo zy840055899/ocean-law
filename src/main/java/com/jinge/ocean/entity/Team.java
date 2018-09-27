@@ -8,10 +8,10 @@ import java.util.Date;
  */
 public class Team {
     private int id;
-    private String name;
+    private String name;        // 执法队伍名称
     private String phone;
-    private String head;
-    private String headArea;
+    private String head;        // 负责人
+    private String headArea;    // 负责区域
     private Date createTime;
 
     public int getId() {

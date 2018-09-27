@@ -17,4 +17,6 @@ public interface TeamDao {
      * @author zy 2018-9-27 16:54:36
      */
     List<Team> getAllTeams(@Param("teamName") String teamName);
+
+    void addTeam(Team team);
 }

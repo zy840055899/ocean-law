@@ -4,7 +4,6 @@
 
 <mapper namespace="com.jinge.ocean.dao.TeamDao">
 
-
     <select id="getAllTeams" resultType="com.jinge.ocean.entity.Team" parameterType="string">
         select id, name, phone, head, head_area "headArea", createtime from team
         <if test="teamName!='' and teamName!=null">
@@ -12,6 +11,9 @@
         </if>
     </select>
 
+    <insert id="addTeam" parameterType="com.jinge.ocean.entity.Team">
+        insert into team(name, phone, head, head_area, createtime) values (#{name}, #{phone}, #{head}, #{headArea}, now())
+    </insert>
 
 </mapper>
 

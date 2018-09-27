@@ -16,4 +16,8 @@ public class TeamServiceImpl implements TeamService {
     public List<Team> getAllTeams(String teamName) {
         return teamDao.getAllTeams(teamName);
     }
+
+    public void addTeam(Team team) {
+        teamDao.addTeam(team);
+    }
 }
