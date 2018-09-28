@@ -34,11 +34,10 @@
         <property name="suffix" value=".jsp"></property>
     </bean>
 
-    <!-- 上传文件必须配置的bean -->
-    <!-- 限制上传文件大小为100KB -->
-    <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
-        <!--<property name="maxUploadSize" value="10485760"></property>-->
-    <!--</bean>-->
+    <!-- 上传文件必须配置的bean,限制上传文件大小为5M -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="5242880"></property>
+    </bean>
 
     <!-- mysql数据库配置-->
     <import resource="mysql.xml"/>
