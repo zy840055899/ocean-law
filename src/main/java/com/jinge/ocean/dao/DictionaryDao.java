@@ -2,6 +2,7 @@ package com.jinge.ocean.dao;
 
 import com.jinge.ocean.entity.dictionary.CaseFrom;
 import com.jinge.ocean.entity.dictionary.CaseType;
+import com.jinge.ocean.entity.dictionary.DiscretionGrade;
 import com.jinge.ocean.entity.dictionary.ShipType;
 import org.apache.ibatis.annotations.Param;
 
@@ -40,6 +41,15 @@ public interface DictionaryDao {
     void updateShipType(ShipType shipType);
 
     List<ShipType> getAllShipType(@Param("shipTypeName") String shipTypeName);
+
+    /*----------------------DiscretionGrade 裁量阶次------------------*/
+    void addDiscretionGrade(DiscretionGrade discretionGrade);
+
+    void delDiscretionGradeById(@Param("discretionGradeId") String discretionGradeId);
+
+    void updateDiscretionGrade(DiscretionGrade discretionGrade);
+
+    List<ShipType> getAllDiscretionGrade(@Param("discretionGradeName") String discretionGradeName);
 
 
 }

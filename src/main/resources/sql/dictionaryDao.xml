@@ -67,6 +67,27 @@
         </if>
     </select>
 
+    <!-- ================DiscretionGrade===================== -->
+    <insert id="addDiscretionGrade" parameterType="com.jinge.ocean.entity.dictionary.DiscretionGrade">
+        insert into dic_discretion_grade(discretion_grade, remark, createtime) values (#{discretionGrade}, #{remark},now())
+    </insert>
+
+    <update id="delDiscretionGradeById" parameterType="string">
+        update dic_discretion_grade set isdel=1, updatetime=now() where id=#{discretionGradeId}
+    </update>
+
+    <update id="updateDiscretionGrade" parameterType="com.jinge.ocean.entity.dictionary.DiscretionGrade">
+        update dic_discretion_grade set discretion_grade=#{discretionGrade}, remark=#{remark}, updatetime=now() where id=#{id}
+    </update>
+
+    <select id="getAllDiscretionGrade" resultType="com.jinge.ocean.entity.dictionary.DiscretionGrade" parameterType="string">
+        select id, discretion_grade "discretionGrade", remark from dic_discretion_grade
+        where isdel=0
+        <if test="discretionGradeName!='' and discretionGradeName!=null">
+            and discretion_grade like CONCAT('%',#{discretionGradeName},'%')
+        </if>
+    </select>
+
 </mapper>
 
 
