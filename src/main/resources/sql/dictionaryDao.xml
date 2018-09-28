@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.jinge.ocean.dao.DictionaryDao">
+
+    <!-- ================casefrom===================== -->
+
+    <insert id="addCaseFrom" parameterType="com.jinge.ocean.entity.dictionary.CaseFrom">
+        insert into dic_case_from(case_from, remark, createtime) values (#{caseFrom}, #{remark},now())
+    </insert>
+
+    <update id="delCaseFromById" parameterType="string">
+        update dic_case_from set isdel=1, updatetime=now() where id=#{caseFromId}
+    </update>
+
+    <update id="updateCaseFrom" parameterType="com.jinge.ocean.entity.dictionary.CaseFrom">
+        update dic_case_from set case_from=#{caseFrom}, remark=#{remark}, updatetime=now() where id=#{id}
+    </update>
+
+    <select id="getAllCaseFrom" resultType="com.jinge.ocean.entity.dictionary.CaseFrom" parameterType="string">
+        select id, case_from "caseFrom", remark from dic_case_from
+        where isdel=0
+        <if test="caseFromName!='' and caseFromName!=null">
+            and case_from like CONCAT('%',#{caseFromName},'%')
+        </if>
+    </select>
+
+</mapper>
+
+

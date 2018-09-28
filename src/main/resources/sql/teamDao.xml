@@ -4,16 +4,29 @@
 
 <mapper namespace="com.jinge.ocean.dao.TeamDao">
 
-    <select id="getAllTeams" resultType="com.jinge.ocean.entity.Team" parameterType="string">
-        select id, name, phone, head, head_area "headArea", createtime from team
-        <if test="teamName!='' and teamName!=null">
-            where name like CONCAT('%',#{teamName},'%')
-        </if>
-    </select>
-
     <insert id="addTeam" parameterType="com.jinge.ocean.entity.Team">
         insert into team(name, phone, head, head_area, createtime) values (#{name}, #{phone}, #{head}, #{headArea}, now())
     </insert>
+
+    <update id="delTeamById" parameterType="string">
+        update team set isdel=1, updatetime=now() where id=#{teamId}
+    </update>
+
+    <update id="updateTeam" parameterType="com.jinge.ocean.entity.Team">
+        update team set name=#{name}, phone=#{phone}, head=#{head}, head_area=#{headArea}, updatetime=now() where id=#{id}
+    </update>
+
+    <select id="getAllTeams" resultType="com.jinge.ocean.entity.Team" parameterType="string">
+        select id, name, phone, head, head_area "headArea", createtime from team
+        where isdel=0
+        <if test="teamName!='' and teamName!=null">
+            and name like CONCAT('%',#{teamName},'%')
+        </if>
+    </select>
+
+    <select id="getTeamById" parameterType="string" resultType="com.jinge.ocean.entity.Team">
+        select id, name,phone, head, head_area "headArea", createtime from team where id=#{teamId}
+    </select>
 
 </mapper>
 
