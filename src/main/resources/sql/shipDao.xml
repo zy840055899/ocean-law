@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.jinge.ocean.dao.ShipDao">
+
+    <resultMap type="com.jinge.ocean.entity.Ship" id="ShipResultMap">
+        <id column="ship_id" property="shipId"/>
+        <result column="ship_name" property="shipName"/>
+        <result column="ship_type" property="shipType"/>
+        <result column="work_type" property="workType"/>
+        <result column="work_way" property="workWay"/>
+        <result column="ship_material" property="shipMaterial"/>
+        <result column="load_person" property="loadPerson"/>
+        <result column="ais_no" property="aisNo"/>
+        <result column="bds_id" property="bdsId"/>
+        <result column="has_fishing_license" property="hasFishingLicense"/>
+        <result column="has_owner_license" property="hasOwnerLicense"/>
+        <result column="has_ship_certificate" property="hasShipCertificate"/>
+        <result column="has_illegal" property="hasIllegal"/>
+        <result column="pic_url" property="picUrl"/>
+    </resultMap>
+
+    <insert id="addShip" parameterType="com.jinge.ocean.entity.Ship">
+        insert into ship(ship_name, shipowner, phone, ship_type, work_type, work_way, power, ship_material, tonnage, load_person, harbor, ais_no, bds_id, has_fishing_license, has_owner_license, has_ship_certificate, pic_url, createtime)
+        values (#{shipName},#{shipowner},#{phone},#{shipType},#{workType},#{workWay},#{power},#{shipMaterial},#{tonnage},#{loadPerson},#{harbor},#{aisNo},#{bdsId},#{hasFishingLicense},#{hasOwnerLicense},#{hasShipCertificate},#{picUrl},now())
+    </insert>
+
+    <update id="delShipById" parameterType="string">
+        update ship set isdel=1, updatetime=now() where ship_id=#{shipId}
+    </update>
+
+    <update id="updateShip" parameterType="com.jinge.ocean.entity.Ship">
+        update ship set ship_name=#{shipName}, shipowner=#{shipowner}, phone=#{phone}, ship_type=#{shipType}, work_type=#{workType},
+            work_way=#{workWay}, power=#{power}, ship_material=#{shipMaterial}, tonnage=#{tonnage}, load_person=#{loadPerson}, harbor=#{harbor},
+            ais_no=#{aisNo}, bds_id=#{bdsId}, has_fishing_license=#{hasFishingLicense}, has_owner_license=#{hasOwnerLicense}, has_ship_certificate=#{hasShipCertificate},
+            pic_url=#{picUrl}, updatetime=now()
+        where ship_id=#{shipId}
+    </update>
+
+    <select id="getAllShips" resultMap="ShipResultMap">
+        select ship_id, ship_name, shipowner, phone, ship_type, work_type, work_way, power, ship_material, tonnage, load_person, harbor, ais_no, bds_id, has_fishing_license, has_owner_license, has_ship_certificate, has_illegal, pic_url from ship
+        where isdel=0
+        <if test="shipName!='' and shipName!=null">
+            and ship_name like CONCAT('%',#{shipName},'%')
+        </if>
+        <if test="shipowner!='' and shipowner!=null">
+            and shipowner like CONCAT('%',#{shipowner},'%')
+        </if>
+    </select>
+
+    <select id="getShipById" parameterType="string" resultMap="ShipResultMap">
+        select ship_id, ship_name, shipowner, phone, ship_type, work_type, work_way, power, ship_material, tonnage, load_person, harbor, ais_no, bds_id, has_fishing_license, has_owner_license, has_ship_certificate, has_illegal, pic_url from ship
+        where ship_id=#{shipId}
+    </select>
+
+</mapper>
+
+

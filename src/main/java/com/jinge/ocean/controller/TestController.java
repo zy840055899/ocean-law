@@ -1,6 +1,8 @@
 package com.jinge.ocean.controller;
 
+import com.jinge.ocean.dao.ShipDao;
 import com.jinge.ocean.dao.TestDao;
+import com.jinge.ocean.entity.Ship;
 import com.jinge.ocean.entity.Team;
 import com.jinge.ocean.service.TeamService;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,8 @@ public class TestController {
 
     @Resource
     private TestDao testDao;
+    @Resource
+    private ShipDao shipDao;
 
     @Resource
     private TeamService teamService;
@@ -33,5 +37,11 @@ public class TestController {
     @ResponseBody
     public List<Team> json(Model model, String teamName) {
         return teamService.getAllTeams(teamName);
+    }
+
+    @RequestMapping("ships")
+    @ResponseBody
+    public List<Ship> ships(Model model, String shipName, String owner) {
+        return shipDao.getAllShips(shipName, owner);
     }
 }
