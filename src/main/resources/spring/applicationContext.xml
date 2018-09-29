@@ -39,12 +39,14 @@
         <property name="maxUploadSize" value="5242880"></property>
     </bean>
 
+    <!--<context:property-placeholder location="classpath:config/props.properties"/>-->
+
+
     <!-- mysql数据库配置-->
     <import resource="mysql.xml"/>
 
     <!--若需引入外部spring配置文件，如下-->
     <!--<import resource="quartz.xml" />-->
-
 
     <!--<mvc:interceptors>-->
         <!--<mvc:interceptor>-->
