@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.jinge.ocean.dao.PersonDao">
+
+    <resultMap type="com.jinge.ocean.entity.Person" id="PersonResultMap">
+        <result column="id_number" property="idNumber"/>
+        <result column="ship_name" property="shipName"/>
+        <result column="certificate_type" property="certificateType"/>
+    </resultMap>
+
+    <insert id="addPerson" parameterType="com.jinge.ocean.entity.Person">
+        insert into person(name, id_number, ship_name, gender, age, job, certificate_type, phone, addr, createtime)
+        values (#{name}, #{idNumber}, #{shipName}, #{gender}, #{age}, #{job}, #{certificateType},#{phone},#{addr}, now())
+    </insert>
+
+    <update id="delPersonById" parameterType="string">
+        update person set isdel=1, updatetime=now() where id=#{personId}
+    </update>
+
+    <update id="updatePerson" parameterType="com.jinge.ocean.entity.Ship">
+        update person set name=#{name}, id_number=#{idNumber}, ship_name=#{shipName}, gender=#{gender}, age=#{age},
+            job=#{job}, certificate_type=#{certificateType}, phone=#{phone}, addr=#{addr}, updatetime=now()
+        where ship_id=#{shipId}
+    </update>
+
+    <select id="getAllPerson" resultMap="PersonResultMap">
+        select id, name, id_number, ship_name, gender, age, job, certificate_type, phone, addr from person
+        where isdel=0
+        <if test="personName!='' and personName!=null">
+            and name like CONCAT('%',#{personName},'%')
+        </if>
+        <if test="shipName!='' and shipName!=null">
+            and ship_name like CONCAT('%',#{shipName},'%')
+        </if>
+    </select>
+
+    <select id="getPersonById" parameterType="string" resultMap="PersonResultMap">
+        select id, name, id_number, ship_name, gender, age, job, certificate_type, phone, addr from person
+        where id=#{personId}
+    </select>
+
+</mapper>
+
+
