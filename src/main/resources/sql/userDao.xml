@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.jinge.ocean.dao.UserDao">
+
+    <insert id="addUser" parameterType="com.jinge.ocean.entity.User">
+        insert into user(username, password, createtime) values (#{username}, #{password}, now())
+    </insert>
+
+    <update id="delUserById" parameterType="string">
+        update user set isdel="1", updatetime=now() where id=#{userId}
+    </update>
+
+    <update id="updateUser" parameterType="com.jinge.ocean.entity.User">
+        update user set username=#{username}, password=#{password}, updatetime=now() where id=#{id}
+    </update>
+
+    <select id="getAllUsers" resultMap="com.jinge.ocean.entity.User" parameterType="string">
+        select id, username from user
+        where isdel=0
+        <if test="username!='' and username!=null">
+            and username like CONCAT('%',#{username},'%')
+        </if>
+    </select>
+
+</mapper>
+
+
