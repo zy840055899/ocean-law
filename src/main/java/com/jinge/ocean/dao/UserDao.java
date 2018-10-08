@@ -17,4 +17,6 @@ public interface UserDao {
 
     List<User> getAllUsers(@Param("username") String username);
 
+    int checkLogin(@Param("username") String username, @Param("pwd") String pwd);
+
 }
