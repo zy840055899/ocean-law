@@ -16,7 +16,7 @@
         update user set username=#{username}, password=#{password}, updatetime=now() where id=#{id}
     </update>
 
-    <select id="getAllUsers" resultMap="com.jinge.ocean.entity.User" parameterType="string">
+    <select id="getAllUsers" resultType="com.jinge.ocean.entity.User" parameterType="string">
         select id, username from user
         where isdel=0
         <if test="username!='' and username!=null">
