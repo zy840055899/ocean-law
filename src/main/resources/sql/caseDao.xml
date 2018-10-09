@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.jinge.ocean.dao.TestDao">
+
+    <resultMap id="CaseMap" type="com.jinge.ocean.entity.Case">
+        <id column="case_id" property="caseId"></id>
+        <result column="case_name" property="caseName"></result>
+        <result column="case_no" property="caseNo"></result>
+        <result column="case_cause" property="caseCause"></result>
+        <result column="cause_item" property="causeItem"></result>
+        <result column="punish_gist" property="punishGist"></result>
+        <result column="law_persons" property="lawPersons"></result>
+        <result column="law_no" property="lawNo"></result>
+        <result column="check_addr" property="checkAddr"></result>
+        <result column="discretion_grade" property="discretionGrade"></result>
+        <result column="case_from" property="caseFrom"></result>
+        <result column="check_time" property="checkTime"></result>
+        <result column="accept_time" property="acceptTime"></result>
+        <result column="obj_id" property="objId"></result>
+        <result column="audio_url" property="audioUrl"></result>
+        <result column="pics_url" property="picsUrl"></result>
+        <result column="video_url" property="videoUrl"></result>
+        <result column="attach_url" property="attachUrl"></result>
+    </resultMap>
+
+    <select id="queryAllCases" resultType="com.jinge.ocean.entity.Case">
+        <![CDATA[
+        select b.ship_name, a.case_no, a.case_from, a.case_cause, a.check_time, a.status from `case` a, ship_of_law b
+        where a.obj_id=b.ship_id
+            <if test="caseNo!='' and caseNo!=null">
+                and a.case_no like CONCAT('%',#{caseNo},'%')
+            </if>
+            <if test="shipName!='' and shipName!=null">
+                and b.ship_name like CONCAT('%',#{shipName},'%')
+            </if>
+            <if test="startDate!='' and startDate!=null">
+                and a.check_time >= str_to_date(#{startDate}, '%Y-%m-%d')
+            </if>
+            <if test="endDate!='' and endDate!=null">
+                and a.check_time <= str_to_date(#{endDate}, '%Y-%m-%d')
+            </if>
+        ]]>
+    </select>
+
+
+</mapper>
+
+
