@@ -46,12 +46,18 @@
         update dic_case_type set case_type=#{caseType}, remark=#{remark}, updatetime=now() where id=#{id}
     </update>
 
-    <select id="getAllCaseType" resultType="com.jinge.ocean.entity.dictionary.CaseType" parameterType="string">
+    <select id="getAllCaseType" resultType="com.jinge.ocean.entity.dictionary.CaseType">
         select id, case_type "caseType", remark from dic_case_type
         where isdel=0
         <if test="caseTypeName!='' and caseTypeName!=null">
             and case_type like CONCAT('%',#{caseTypeName},'%')
         </if>
+        order by updatetime desc ,createtime desc
+        limit #{startRow}, #{row}
+    </select>
+
+    <select id="getCaseTypeCount" resultType="java.lang.Integer" parameterType="string">
+        select count(id) from dic_case_type where case_type like CONCAT('%',#{caseTypeName},'%')
     </select>
 
     <!-- ================shipType===================== -->

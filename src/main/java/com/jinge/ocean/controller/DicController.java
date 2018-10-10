@@ -5,6 +5,7 @@ import com.jinge.ocean.dao.DictionaryDao;
 import com.jinge.ocean.entity.Page;
 import com.jinge.ocean.entity.ResultMap;
 import com.jinge.ocean.entity.dictionary.CaseFrom;
+import com.jinge.ocean.entity.dictionary.CaseType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -43,8 +44,6 @@ public class DicController {
         return new ResultMap();
     }
 
-
-
     @RequestMapping("updateCaseFrom")
     @ResponseBody
     public ResultMap updateCaseFrom(CaseFrom caseFrom) {
@@ -66,5 +65,24 @@ public class DicController {
         return resultMap;
     }
 
+    //----------------------------案件类型-------------------------------------------
+    @RequestMapping("queryAllCaseType")
+    @ResponseBody
+    public Map queryAllCaseType(Page page) {
+        Map resultMap = Maps.newHashMap();
+        List<CaseType> caseTypes = dictionaryDao.getAllCaseType("", page.getStartRow(), page.getRows());
+        resultMap.put("rows", caseTypes);
+        if (caseTypes.isEmpty()) {
+            resultMap.put("total", 0);
+        } else {
+            resultMap.put("total", dictionaryDao.getCaseTypeCount(""));
+        }
+        return resultMap;
+    }
+
+    @RequestMapping("toCaseTypePage")
+    public String toCaseTypePage() {
+        return "dic/caseType";
+    }
 
 }

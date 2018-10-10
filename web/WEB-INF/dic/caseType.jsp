@@ -5,7 +5,7 @@
 <head>
 <%@ include file="/WEB-INF/base/static.jsp"%>
 <link type="text/css" rel="stylesheet" href="<%=path%>/resources/portal/css/share.css?v=${v}">
-<title>案件来源</title>
+<title>案件类型</title>
 <style type="text/css">
 
 .pushpage{
@@ -18,13 +18,13 @@ padding-left: 5px;
 </head>
 <body>
 <div class="tabsearchdiv">
-	<a class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="add()">新增案件来源</a>
+	<a class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="add()">新增案件类型</a>
 </div>
 <table id="creditList"></table>  
 
 <div id="creditdialog" class="inputform ea-daiv">
 	<ul>
-		<li>&emsp;&emsp;&emsp;来源名称：<input class="w172" id="dname"><span class="red">*	</span></li>
+		<li>&emsp;案件类型名称：<input class="w172" id="dname"><span class="red">*	</span></li>
 		<li>&emsp;&emsp;&emsp;&emsp;&emsp;备注：<textarea class="w172" id="annotation" rows="3" cols=""></textarea> </li>
 	</ul>
 </div>
@@ -41,7 +41,7 @@ $(function(){
 	//表格初始化
 	$("#creditList").datagrid({
 		//title:"职务管理",
-		url:$path + "/dic/queryAllCaseFrom.do",
+		url:$path + "/dic/queryAllCaseType.do",
 		//width:532,
 		width:'99%',
 	    pagination:true,
@@ -50,11 +50,11 @@ $(function(){
 	    pageList:[5,10,15,30],
 	    nowrap:false,
 	    columns:[[    
-	        {field:'caseFrom',title:'案件来源',width:'35%'},
+	        {field:'caseType',title:'案件类型',width:'35%'},
 	        {field:'remark',title:'备注',width:'35%'},
 	        {field:'null',title:'操作',width:'30%',formatter: function(value,row,index){
 	            	var remark = row.remark==null?"":row.remark;
-	        		return '<a href="#" onclick="update(\'' + row.id + '\',\''+ row.caseFrom + '\',\''+ remark + '\')">修改</a>&nbsp;&nbsp;'
+	        		return '<a href="#" onclick="update(\'' + row.id + '\',\''+ row.caseType + '\',\''+ remark + '\')">修改</a>&nbsp;&nbsp;'
 	        				+"<a href='##' onclick='del("+row.id+")'>删除</a>&nbsp;&nbsp;";
 	        				// +"<a href='##' onclick='details("+row.id+")'>详情</a>";
 	        	}

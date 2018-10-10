@@ -34,7 +34,9 @@ public interface DictionaryDao {
 
     void updateCaseType(CaseType caseType);
 
-    List<CaseType> getAllCaseType(@Param("caseTypeName") String caseTypeName);
+    List<CaseType> getAllCaseType(@Param("caseTypeName") String caseTypeName, @Param("startRow")long startrow, @Param("row")long row);
+
+    int getCaseTypeCount(@Param("caseTypeName")String caseTypeName);
 
     /*----------------------shipType 主体类型（船舶）增删改查------------------*/
     void addShipType(ShipType shipType);
