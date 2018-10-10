@@ -1,0 +1,38 @@
+html{
+	height: 100%;
+}
+.hideing{
+	display: none;
+}
+.showing{
+	display: inline;
+}
+.tab {
+	border-top: #95B8E7 1px solid;
+	border-left: #95B8E7 1px solid;
+	border-spacing: 0px;
+}
+
+.tab td,.tab th {
+	border-bottom: #95B8E7 1px solid;
+	border-right: #95B8E7 1px solid;
+	height: 30px;
+}
+
+.inputform ul li {
+	list-style-type: none;
+	margin: 20px 0px;
+}
+
+.inputform input[type="text"] {
+	width: 300px;
+}
+.tabsearchdiv{
+	height: 50px;
+	line-height: 50px;
+}
+
+span.red{
+	padding-left:5px;
+	color: red;
+}

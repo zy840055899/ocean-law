@@ -1,0 +1,84 @@
+* {
+	margin: 0px;
+	padding: 0px
+}
+
+html,body {
+	height: 100%;
+	overflow: hidden;
+}
+iframe {
+	border: none;
+	height: 99%;
+	width: 100%;
+}
+
+#top {
+	background:url("../../system/imgs/1.png");
+	height: 50px;
+}
+#logarea{
+	width: auto;
+	height:50px;
+	float: right;
+	margin-right: 50px;
+}
+#logarea ul li{
+	list-style-type: none;
+	float: left;
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+#logarea img{
+	cursor:pointer;
+	width: 30px;
+	height:30px;
+}
+#left {
+	background-color: #fafafa;
+	float: left;
+	width: 180px;
+	height: 89%;
+	border-right: 1px #f0f0f0 solid;
+	overflow: auto;
+}
+
+#rigth {
+	background-color: yellow;
+	float: right;
+}
+
+#bottom {
+	background:url("../../system/imgs/4.jpg");
+	height: 40px;
+}
+#left ul li p {
+	position:relative;
+	line-height:40px;
+	border-bottom:1px solid #c8c8cb;
+	height:41px;
+	padding-left: 5px;
+	background:url("../../system/imgs/2.png");
+}
+#left ul li p img{
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	top:10px;
+	right: 10px;
+}
+#left ul li p:HOVER,#left ul li div:HOVER {
+	background-color: orange;
+	cursor: pointer;
+}
+
+#left ul li div {
+	display: none;
+	line-height:30px;
+	border-bottom:1px solid #f0f0f0;
+	height:32px;
+	padding-left: 25px;
+	background: url("../../system/imgs/3.png") left no-repeat;
+	background-position: 12px;
+}

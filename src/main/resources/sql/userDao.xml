@@ -24,8 +24,8 @@
         </if>
     </select>
 
-    <select id="checkLogin" resultType="int">
-        select count(id) from user where username=#{username} and password=MD5(#{pwd}) and isdel=0
+    <select id="checkLogin" resultType="java.lang.Integer">
+        select count(id) from user where username=#{username} and password=#{pwd} and isdel=0
     </select>
 
 

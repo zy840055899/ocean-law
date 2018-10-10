@@ -29,4 +29,9 @@ public class LoginController {
         return userService.checkLogin(username, password);
     }
 
+    @RequestMapping("toLogin")
+    public String toLogin() {
+        return "login/login";
+    }
+
 }
