@@ -3,6 +3,7 @@ package com.jinge.ocean.controller;
 import com.google.common.collect.Maps;
 import com.jinge.ocean.dao.DictionaryDao;
 import com.jinge.ocean.entity.Page;
+import com.jinge.ocean.entity.ResultMap;
 import com.jinge.ocean.entity.dictionary.CaseFrom;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,30 @@ public class DicController {
         return "dic/caseFrom";
     }
 
+    @RequestMapping("addCaseFrom")
+    @ResponseBody
+    public ResultMap addCaseFrom(CaseFrom caseFrom) {
+        dictionaryDao.addCaseFrom(caseFrom);
+        return new ResultMap();
+    }
+
+
+    @RequestMapping("delCaseFrom")
+    @ResponseBody
+    public ResultMap delCaseFrom(String id) {
+        dictionaryDao.delCaseFromById(id);
+        return new ResultMap();
+    }
+
+
+
+    @RequestMapping("updateCaseFrom")
+    @ResponseBody
+    public ResultMap updateCaseFrom(CaseFrom caseFrom) {
+        dictionaryDao.updateCaseFrom(caseFrom);
+        return new ResultMap();
+    }
+
     @RequestMapping("queryAllCaseFrom")
     @ResponseBody
     public Map queryAllCaseFrom(Page page) {
@@ -40,7 +65,6 @@ public class DicController {
         }
         return resultMap;
     }
-
 
 
 }

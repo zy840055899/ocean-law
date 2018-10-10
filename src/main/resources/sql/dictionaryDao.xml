@@ -23,6 +23,7 @@
         <if test="caseFromName!='' and caseFromName!=null">
             and case_from like CONCAT('%',#{caseFromName},'%')
         </if>
+        order by updatetime desc ,createtime desc
         limit #{startRow}, #{row}
     </select>
 

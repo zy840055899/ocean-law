@@ -18,13 +18,13 @@ padding-left: 5px;
 </head>
 <body>
 <div class="tabsearchdiv">
-	<a class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="add()">新增职务管理</a>
+	<a class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="add()">新增案件来源</a>
 </div>
 <table id="creditList"></table>  
 
 <div id="creditdialog" class="inputform ea-daiv">
 	<ul>
-		<li>&emsp;&emsp;&emsp;职务名称：<input class="w172" id="dname"><span class="red">*	</span></li>
+		<li>&emsp;&emsp;&emsp;来源名称：<input class="w172" id="dname"><span class="red">*	</span></li>
 		<li>&emsp;&emsp;&emsp;&emsp;&emsp;备注：<textarea class="w172" id="annotation" rows="3" cols=""></textarea> </li>
 	</ul>
 </div>
@@ -53,9 +53,10 @@ $(function(){
 	        {field:'caseFrom',title:'案件来源',width:'35%'},
 	        {field:'remark',title:'备注',width:'35%'},
 	        {field:'null',title:'操作',width:'30%',formatter: function(value,row,index){
-	        		return "<a href='##' onclick='update("+row.id+")'>修改</a>&nbsp;&nbsp;"
-	        				+"<a href='##' onclick='del("+row.id+")'>删除</a>&nbsp;&nbsp;"
-	        				+"<a href='##' onclick='details("+row.id+")'>详情</a>";
+	            	var remark = row.remark==null?"":row.remark;
+	        		return '<a href="#" onclick="update(\'' + row.id + '\',\''+ row.caseFrom + '\',\''+ remark + '\')">修改</a>&nbsp;&nbsp;'
+	        				+"<a href='##' onclick='del("+row.id+")'>删除</a>&nbsp;&nbsp;";
+	        				// +"<a href='##' onclick='details("+row.id+")'>详情</a>";
 	        	}
 	        }
 	    ]]
@@ -63,7 +64,7 @@ $(function(){
 	
 	//新增（修改）职务管理弹框初始化
 	$("#creditdialog").dialog({
-		title:"新增职务管理",
+		title:"新增案件来源",
 		width:450,
 		height:220,
 		closed:true,
@@ -93,23 +94,23 @@ $(function(){
 					var dname = $("#dname").val();
 		        	var annotation = $("#annotation").val();
 		        	if(dname==''){
-		        		$.messager.alert("消息","职务名称不能为空","warning");
+		        		$.messager.alert("消息","案件来源名称不能为空","warning");
 		        		return;
 		        	}
 		        	$.messager.progress(); 
 		        	$.ajax({
 						type : "POST",
 						dataType : "JSON",
-						url : $path +"/portal/DutyManage/add.action",
-						data : {dname:dname,annotation:annotation},
+						url : $path +"/dic/addCaseFrom.do",
+						data : {caseFrom:dname,remark:annotation},
 						success : function(data) {
 							$.messager.progress("close");
-							if (data.code>0) {
+							if (data.resultCode="0000") {
 								$.messager.alert("消息","添加成功","info");
 								$("#creditList").datagrid("reload");
 								$("#creditdialog").dialog("close");
 							} else {
-								$.messager.alert("错误", data.msg,"error");
+								$.messager.alert("错误", data.resultDesc,"error");
 							}
 						},
 						error:function(){
@@ -128,14 +129,15 @@ $(function(){
 		}).dialog("openl");
 	}
 	//修改数据
-	function update(id){
+	function update(id, dname, remark){
 		$("#creditdialog").dialog({
 			title:"修改职务管理"
 		});
 		//清空dialog
 		clearDialog();
-		//取值   
-		fillInfo(id);
+		//取值
+        $("#dname").val(dname);
+        $("#annotation").val(remark);
 		//保存
 		$("#creditdialog").dialog({
 			buttons:[{
@@ -153,16 +155,16 @@ $(function(){
 		        	$.ajax({
 						type : "POST",
 						dataType : "JSON",
-						url : $path +"/portal/DutyManage/update.action",
-						data : {id:id,dname:dname,annotation:annotation},
+						url : $path +"/dic/updateCaseFrom.do",
+						data : {id:id,caseFrom:dname,remark:annotation},
 						success : function(data) {
 							$.messager.progress("close");
-							if (data.code>0) {
+							if (data.resultCode=="0000") {
 								$.messager.alert("消息","修改成功","info");
 								$("#creditList").datagrid("reload");
 								$("#creditdialog").dialog("close");
 							} else {
-								$.messager.alert("错误", data.msg,"error");
+								$.messager.alert("错误", data.resultDesc,"error");
 							}
 						},
 						error:function(){
@@ -185,7 +187,7 @@ $(function(){
 	function del(id){
 		$.messager.confirm('确认','您确定要删除这条数据吗？',function(r){
 		    if (r){    
-	           $.post($path+"/portal/DutyManage/delete.action",{id:id},function(data){
+	           $.post($path+"/dic/delCaseFrom.do",{id:id},function(data){
 		        	$.messager.alert("消息","删除成功","info");
 		       		$('#creditList').datagrid('reload');
 	           });
