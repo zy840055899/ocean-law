@@ -23,7 +23,14 @@
         <if test="caseFromName!='' and caseFromName!=null">
             and case_from like CONCAT('%',#{caseFromName},'%')
         </if>
+        limit #{startRow}, #{row}
     </select>
+
+
+    <select id="getCaseFromCount" resultType="java.lang.Integer" parameterType="string">
+        select count(id) from dic_case_from where case_from like CONCAT('%',#{caseFromName},'%')
+    </select>
+
 
     <!-- ================caseType===================== -->
     <insert id="addCaseType" parameterType="com.jinge.ocean.entity.dictionary.CaseType">

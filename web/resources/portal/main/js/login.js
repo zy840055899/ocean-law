@@ -27,8 +27,8 @@ $(function(){
 		}
 		$.post($path+"/login/checkLogin.do",{"username":nicname, "password":pass},function(data){
 			if(data.resultCode == "0000"){
-				// window.location.href=$webURI+"/system/index/toMain.action?f=1";
-				alert("success");
+				window.location.href=$path+"/system/index/toMain.do";
+				// alert("success");
 			}else{
 				changecode();
 				alert(data.resultDesc);

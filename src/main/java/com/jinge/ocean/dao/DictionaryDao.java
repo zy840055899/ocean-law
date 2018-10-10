@@ -22,7 +22,10 @@ public interface DictionaryDao {
 
     void updateCaseFrom(CaseFrom caseFrom);
 
-    List<CaseFrom> getAllCaseFrom(@Param("caseFromName") String caseFromName);
+    List<CaseFrom> getAllCaseFrom(@Param("caseFromName") String caseFromName, @Param("startRow")long startrow, @Param("row")long row);
+
+    int getCaseFromCount(@Param("caseFromName")String caseFromName);
+
 
     /*----------------------caseType 案件类型增删改查------------------*/
     void addCaseType(CaseType caseType);

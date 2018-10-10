@@ -36,7 +36,7 @@
         				$(d).addClass("active");
         				openWin(c,a);
         			}else{
-        				window.open($webURI+a);
+        				window.open($path+a);
         			}
         		}
     		}
@@ -61,7 +61,7 @@ function changekl(){
 
 function openWin(a,b){
 	$("#content_title").text(a);
-	$("#content").attr("src",$webURI+b);
+	$("#content").attr("src",$path+b);
 };
    
 function showTime(){
